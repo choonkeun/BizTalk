@@ -1,0 +1,24 @@
+
+PurchaseOrder.xml
+
+---
+PO ReceivePort
+PO Receive Location
+D:\Data\In
+FILE
+*Copy*.xml
+pipeline: XMLReceive
+
+---
+PO SendPort
+FILE
+D:\Data\Out
+%MessageID%.xml
+Filter: BTS.ReceivePortName == PO ReceivePort
+pipeline: XMLTransmit
+
+
+
+
+
+

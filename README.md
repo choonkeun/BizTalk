@@ -1,2 +1,2 @@
 # BizTalk
-BizTalk: SOA Tool
+BizTalk: System Integration Tool

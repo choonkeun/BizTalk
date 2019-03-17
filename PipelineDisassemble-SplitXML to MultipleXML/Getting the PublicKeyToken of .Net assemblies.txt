@@ -1,0 +1,21 @@
+VS 2008 on 32bit Windows :
+"%ProgramFiles%\Microsoft SDKs\Windows\v6.0A\bin\sn.exe" -T <assemblyname>
+
+VS 2008 on 64bit Windows :
+"%ProgramFiles(x86)%\Microsoft SDKs\Windows\v6.0A\bin\sn.exe" -T <assemblyname>
+
+VS 2010 on 32bit Windows :
+"%ProgramFiles%\Microsoft SDKs\Windows\v7.0A\bin\sn.exe" -T <assemblyname>
+
+VS 2010 on 64bit Windows :
+"%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.0A\bin\sn.exe" -T <assemblyname>
+
+VS 2012 on 32bit Windows :
+"%ProgramFiles%\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\sn.exe" -T <assemblyname>
+
+  VS 2012 on 64bit Windows :
+  "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\sn.exe" -T <assemblyname>
+
+  VS 2015 on 64bit Windows :
+  "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -T <assemblyname>
+

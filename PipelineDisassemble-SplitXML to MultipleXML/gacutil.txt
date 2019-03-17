@@ -1,0 +1,25 @@
+gacutil -i <assembly name>
+
+1.Open a Visual Studio command prompt
+ ( Start > Programs > Visual Studio 2017 > Visual Studio .NET Tools > Developer Command Prompt for VS 2017 )
+ Location:  C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2015\Visual Studio Tools\
+
+2. Run gacutil.exe on VS Command prompt
+	--------------------------
+	gacutil -i <assembly name>
+	--------------------------
+
+	gacutil -i "D:\BizTalk Courses\PipelineDisassemble\PipelineDisassemble\bin\Debug\PipelineDisassemble.dll"
+	
+3. my assembly location: C:\Windows\Microsoft.NET\assembly\GAC_MSIL\
+
+   C:\Windows\Microsoft.NET\assembly\GAC_MSIL\PipelineDisassemble\v4.0_1.0.0.0__bca2627373295044
+---
+Please verify that 
+the DLL for pipeline disassemble component is in <BizTalkInstallationDirectory>\Pipeline Components
+and DLL of receive pipeline is in GAC
+
+4. BizTalk Pipeline Directory:
+   C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\SplitXML.dll
+   C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\PipelineDisassemble.dll
+   

@@ -1,0 +1,71 @@
+
+D:\>cd "D:\BizTalk Courses\PipelineDecode\PipelineDecode\bin\Debug"
+D:\>cd "D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug"
+
+D:\BizTalk Courses\PipelineDecode\PipelineDecode\bin\Debug>gacutil -u PipelineDecode
+D:\BizTalk Courses\PipelineDecode\PipelineDecode\bin\Debug>gacutil -u ExcelToFlatFile
+
+Microsoft (R) .NET Framework Strong Name Utility  Version 4.0.30319.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Public key token is 4e78a1cd40a3fa46
+
+D:\BizTalk Courses\PipelineDecode\PipelineDecode\bin\Debug>
+-------------------
+Check
+-------------------
+C:\Windows\Microsoft.NET\assembly\GAC_MSIL\ExcelToFlatFile\v4.0_1.0.0.0__fac3fe6804f7dbf7
+C:\Windows\Microsoft.NET\assembly\GAC_MSIL\PipelineDecode\v4.0_1.0.0.0__4e78a1cd40a3fa46
+
+
+1.Open a Visual Studio command prompt
+ ( Start > Programs > Visual Studio 2017 > Visual Studio .NET Tools > Developer Command Prompt for VS 2017 )
+ Location:  C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2015\Visual Studio Tools\
+
+2. Run gacutil.exe on VS Command prompt
+	--------------------------
+	gacutil -i <assembly name>
+	--------------------------
+
+    gacutil -i "D:\BizTalk Courses\PipelineDecode\PipelineDecode\bin\Debug\PipelineDecode.dll"
+    gacutil -i "D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug\ExcelToFlatFile.dll"
+	
+3. my assembly location: C:\Windows\Microsoft.NET\assembly\GAC_MSIL\
+
+   C:\Windows\Microsoft.NET\assembly\GAC_MSIL\PipelineDisassemble\v4.0_1.0.0.0__bca2627373295044
+   C:\Windows\Microsoft.NET\assembly\GAC_MSIL\ExcelToFlatFile\v4.0_1.0.0.0__fac3fe6804f7dbf7
+   
+---
+Please verify that 
+the DLL for pipeline disassemble component is in <BizTalkInstallationDirectory>\Pipeline Components
+and DLL of receive pipeline is in GAC
+
+4. Copy BizTalk Pipeline Directory:
+
+   C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\PipelineDecode.dll
+   C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\ExcelToFlatFile.dll
+   
+---
+5. Excel: Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties="Excel 12.0;HDR=YES;"
+
+
+-------------------
+gacutil - uninstall 
+-------------------
+
+D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug>
+D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug>gacutil -u ExcelToFlatFile
+Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+Assembly: ExcelToFlatFile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fac3fe6804f7dbf7, processorArchitecture=MSIL
+Uninstalled: ExcelToFlatFile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fac3fe6804f7dbf7, processorArchitecture=MSIL
+Number of assemblies uninstalled = 1
+Number of failures = 0
+
+D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug>
+
+-------------------
+Sign : C:\Windows\system32>"%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -T PipelineDecode.dll
+-------------------

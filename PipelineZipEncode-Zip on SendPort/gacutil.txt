@@ -1,0 +1,44 @@
+
+ReceivePort_Zip
+ReceiveLocation_Zip
+D:\Data\In
+bo*.xml - no duplication is allowed on entire Biztalk
+FILE
+
+SendPort_Zip
+%SourceFileName%.zip
+
+------------------------------
+Project Build - PostBuildEvent: ZipEncoder
+------------------------------
+CALL "%VS140COMNTOOLS%vsvars32.bat"
+gacutil.exe /i "$(TargetPath)"
+---
+Build Output: C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\
+
+------------------------------
+Ionic.Zip.dll: Visual Studio Command Prompt - Admin
+------------------------------
+gacutil.exe /i "C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\Ionic.Zip.dll"
+
+------------------------------
+Project Build - Deploy        : PipelineZipEncode
+------------------------------
+Project Name: PipelineZipEncode
+
+-------------------
+gacutil - uninstall 
+-------------------
+1.Open a Visual Studio command prompt
+ Location:  C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2015\Visual Studio Tools\
+
+2. Run gacutil.exe on VS Command prompt
+
+    gacutil -u ZipEncoder
+    gacutil -i "D:\BizTalk Courses\PipelineZipEncode\ZipEncoder\bin\Debug\ZipEncoder.dll"
+	
+3. my assembly location: C:\Windows\Microsoft.NET\assembly\GAC_MSIL\
+
+   C:\Windows\Microsoft.NET\assembly\GAC_MSIL\ZipEncoder\v4.0_1.0.0.0__fac3fe6804f7dbf7
+   
+

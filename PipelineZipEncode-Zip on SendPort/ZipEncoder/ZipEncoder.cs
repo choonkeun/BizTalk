@@ -138,24 +138,22 @@ namespace XO.ZipEncoder
 
                 IDictionary<string, Byte[]> lst = new Dictionary<string, Byte[]>();
                 lst.Add(fileName, TextFileBytes);
-                MemoryStream ms;
+
+                MemoryStream ms = new MemoryStream();
+                ms.Seek(0, SeekOrigin.Begin);
 
                 using (ZipFile zip = new ZipFile())
                 {
+                    //zip.Password = _password;
+                    if (_password != null)
+                        zip.Password = _password;
+                    zip.Encryption = Ionic.Zip.EncryptionAlgorithm.WinZipAes256;
                     zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
 
                     foreach (KeyValuePair<string, Byte[]> item in (IDictionary<string, Byte[]>)lst)
                     {
-                        zip.AddEntry(item.Key, item.Value);
+                        zip.AddEntry(item.Key, item.Value); //Key:fileName, Value:TextFileBytes
                     }
-                    ms = new MemoryStream();
-                    ms.Seek(0, SeekOrigin.Begin);
-
-                    //zip.Password = "password";
-                    if (_password != null)
-                        zip.Password = _password;   //not working
-                    zip.AddDirectory(filePath);
-
                     zip.Save(ms);
                 }
 

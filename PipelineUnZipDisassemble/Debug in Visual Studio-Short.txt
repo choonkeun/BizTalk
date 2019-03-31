@@ -1,0 +1,44 @@
+
+*** Be Careful ***
+ CHECK ReceivePort Location Filter File Mask - Other project may pick up your file before your project start debug
+
+------------------------------
+Short Recompile and re-Run
+------------------------------
+1. Change Class DLL source program, Stop 'Host Instance'
+2. Build to write to "C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components"
+3. Cloase Visual Studio and Open VS command with Admin rights
+4. gacutil -u ZipEncoder --> remove
+5. gacutil -i "C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\ZipEncoder.dll"
+6. Open 'Visual Studio' with Admin rights
+7. delete dll from encode pipeline in 'SendPipeline.btp'
+8. In ToolBox, 'Choose items' & drag/Drop again
+
+------------------------------
+ReceivePort_UnZip
+ReceiveLocation_UnZip
+D:\Data\In
+bo*.xml - no duplication is allowed entire Biztalk
+FILE
+
+D:\Data\Out
+SendPort_UnZip
+%SourceFileName%
+
+PipelineUnZipDisassemble_Binding.xml
+
+
+Project Build - PostBuildEvent: 
+------------------------------
+CALL "%VS140COMNTOOLS%vsvars32.bat"
+gacutil.exe /i "$(TargetPath)"
+---
+Project Sign: ********
+---
+Build Output: C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\
+
+------------------------------
+Ionic.Zip.dll: Visual Studio Command Prompt - Admin
+------------------------------
+gacutil.exe /i "C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\Ionic.Zip.dll"
+

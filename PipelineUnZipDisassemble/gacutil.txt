@@ -1,0 +1,94 @@
+
+ReceivePort_Zip
+ReceiveLocation_Zip
+D:\Data\In
+bo*.xml - no duplication is allowed entire Biztalk
+FILE
+
+SendPort_Zip
+%SourceFileName%.zip
+
+------------------------------
+Project Build - PostBuildEvent: ZipEncoder
+------------------------------
+CALL "%VS140COMNTOOLS%vsvars32.bat"
+gacutil.exe /i "$(TargetPath)"
+---
+Project Sign: CalOptima
+---
+Build Output: C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\
+
+------------------------------
+1>------ Build started: Project: PipelineZipEncode, Configuration: Debug Any CPU ------
+2>------ Build started: Project: ZipEncoder, Configuration: Debug Any CPU ------
+1>  PipelineZipEncode -> D:\BizTalk Courses\PipelineZipEncode\PipelineZipEncode\bin\Debug\PipelineZipEncode.dll
+1>  PipelineZipEncode -> D:\BizTalk Courses\PipelineZipEncode\PipelineZipEncode\bin\Debug\PipelineZipEncode.dll
+2>  ZipEncoder -> C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\ZipEncoder.dll
+2>  Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.0
+2>  Copyright (c) Microsoft Corporation.  All rights reserved.
+2>  
+2>  Assembly successfully added to the cache
+========== Build: 2 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+
+------------------------------
+Ionic.Zip.dll: Visual Studio Command Prompt - Admin
+------------------------------
+gacutil.exe /i "C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\Ionic.Zip.dll"
+
+------------------------------
+Project Build - Deploy        : PipelineZipEncode
+------------------------------
+Project Name: PipelineZipEncode
+Project Sign: CalOptima
+
+------------------------------
+1>------ Rebuild All started: Project: PipelineZipEncode, Configuration: Debug Any CPU ------
+2>------ Rebuild All started: Project: ZipEncoder, Configuration: Debug Any CPU ------
+1>  PipelineZipEncode -> D:\BizTalk Courses\PipelineZipEncode\PipelineZipEncode\bin\Debug\PipelineZipEncode.dll
+1>  PipelineZipEncode -> D:\BizTalk Courses\PipelineZipEncode\PipelineZipEncode\bin\Debug\PipelineZipEncode.dll
+2>  ZipEncoder -> C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\ZipEncoder.dll
+2>  Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.0
+2>  Copyright (c) Microsoft Corporation.  All rights reserved.
+2>  
+2>  Assembly successfully added to the cache
+========== Rebuild All: 2 succeeded, 0 failed, 0 skipped ==========
+
+----------------------------------------------------------------------------------------------------
+1.Open a Visual Studio command prompt
+ ( Start > Programs > Visual Studio 2017 > Visual Studio .NET Tools > Developer Command Prompt for VS 2017 )
+ Location:  C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2015\Visual Studio Tools\
+
+2. Run gacutil.exe on VS Command prompt
+
+    gacutil -i "D:\BizTalk Courses\PipelineZipEncode\PipelineZipEncode\bin\Debug\PipelineZipEncode.dll"
+    gacutil -i "D:\BizTalk Courses\PipelineZipEncode\ZipEncoder\bin\Debug\ZipEncoder.dll"
+	
+3. my assembly location: C:\Windows\Microsoft.NET\assembly\GAC_MSIL\
+
+   C:\Windows\Microsoft.NET\assembly\GAC_MSIL\PipelineZipEncode\v4.0_1.0.0.0__bca2627373295044
+   C:\Windows\Microsoft.NET\assembly\GAC_MSIL\ZipEncoder\v4.0_1.0.0.0__fac3fe6804f7dbf7
+   
+4. Copy BizTalk Pipeline Directory:
+
+   C:\Program Files (x86)\Microsoft BizTalk Server 2016\Pipeline Components\ExcelToFlatFile.dll
+   
+-------------------
+Sign
+-------------------
+C:\Windows\system32>"%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -T PipelineDecode.dll
+ 
+-------------------
+gacutil - uninstall 
+-------------------
+
+D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug>
+D:\BizTalk Courses\PipelineDecode\ExcelToFlatFile\bin\Debug>gacutil -u ExcelToFlatFile
+Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+Assembly: ExcelToFlatFile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fac3fe6804f7dbf7, processorArchitecture=MSIL
+Uninstalled: ExcelToFlatFile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fac3fe6804f7dbf7, processorArchitecture=MSIL
+Number of assemblies uninstalled = 1
+Number of failures = 0
+

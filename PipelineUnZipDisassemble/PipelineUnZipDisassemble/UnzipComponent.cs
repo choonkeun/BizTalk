@@ -83,9 +83,14 @@ namespace PipelineUnZipDisassemble
             object val1 = (object)_password;
             propertyBag.Write("Password", ref val1);
         }
-#endregion
+        #endregion
 
-#region IDisassemblerComponent
+        #region IDisassemblerComponent
+
+        //https://docs.microsoft.com/en-us/biztalk/core/how-to-use-message-context-properties
+        //https://docs.microsoft.com/en-us/biztalk/core/file-adapter-property-schema-and-properties
+        //https://biztalklive.blogspot.com/2017/12/unzip-disassemble-pipeline-component-in.html
+
         private System.Collections.Queue _qOutMessages = new System.Collections.Queue();
         public void Disassemble(IPipelineContext pContext, IBaseMessage pInMsg)
         {
@@ -99,9 +104,8 @@ namespace PipelineUnZipDisassemble
                 {
                     using (ZipInputStream zipInputStream = new ZipInputStream(originalStream))
                     {
-                        if (_password != null)
-                            if (_password.Length > 0)
-                                zipInputStream.Password = _password;
+                        if (_password != null && _password.Length > 0)
+                            zipInputStream.Password = _password;
 
                         ZipEntry entry = zipInputStream.GetNextEntry();
 
@@ -122,6 +126,19 @@ namespace PipelineUnZipDisassemble
                             outMessage.AddPart("Body", pContext.GetMessageFactory().CreateMessagePart(), true);
                             memStream.Position = 0;
                             outMessage.BodyPart.Data = memStream;
+
+
+                            IBaseMessageContext context = pInMsg.Context;
+                            string receivePortName = context.Read("ReceivePortName", "http://schemas.microsoft.com/BizTalk/2003/system-properties").ToString();
+                            string fullPath = context.Read("ReceivedFileName", "http://schemas.microsoft.com/BizTalk/2003/file-properties").ToString();
+
+                            //program do not know inside of zipped file name, so use '.xml'
+                            //file extension may delivered from property item just like password
+                            string fileNameOnly = Path.GetFileName(fullPath).Replace(".zip", string.Empty);  
+                            string filePath = Path.GetDirectoryName(fullPath);
+
+                            outMessage.Context.Promote("ReceivedFileName", "http://schemas.microsoft.com/BizTalk/2003/file-properties", fileNameOnly);
+                            outMessage.Context.Promote("ReceivePortName", "http://schemas.microsoft.com/BizTalk/2003/system-properties", receivePortName);
 
                             outMessage.Context = PipelineUtil.CloneMessageContext(pInMsg.Context);
                             _qOutMessages.Enqueue(outMessage);

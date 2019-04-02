@@ -121,6 +121,9 @@ namespace PipelineUnZipDisassemble
                                 memStream.Write(buffer, 0, bytesRead);
                             }
 
+                            string fileName = entry.FileName.ToString();    //file name in zip file
+                            string extension = Path.GetExtension(fileName);
+
                             IBaseMessage outMessage;
                             outMessage = pContext.GetMessageFactory().CreateMessage();
                             outMessage.AddPart("Body", pContext.GetMessageFactory().CreateMessagePart(), true);
@@ -131,16 +134,12 @@ namespace PipelineUnZipDisassemble
                             IBaseMessageContext context = pInMsg.Context;
                             string receivePortName = context.Read("ReceivePortName", "http://schemas.microsoft.com/BizTalk/2003/system-properties").ToString();
                             string fullPath = context.Read("ReceivedFileName", "http://schemas.microsoft.com/BizTalk/2003/file-properties").ToString();
-
-                            //program do not know inside of zipped file name, so use '.xml'
-                            //file extension may delivered from property item just like password
-                            string fileNameOnly = Path.GetFileName(fullPath).Replace(".zip", string.Empty);  
                             string filePath = Path.GetDirectoryName(fullPath);
 
-                            outMessage.Context.Promote("ReceivedFileName", "http://schemas.microsoft.com/BizTalk/2003/file-properties", fileNameOnly);
+                            outMessage.Context = PipelineUtil.CloneMessageContext(pInMsg.Context);
+                            outMessage.Context.Promote("ReceivedFileName", "http://schemas.microsoft.com/BizTalk/2003/file-properties", fileName);
                             outMessage.Context.Promote("ReceivePortName", "http://schemas.microsoft.com/BizTalk/2003/system-properties", receivePortName);
 
-                            outMessage.Context = PipelineUtil.CloneMessageContext(pInMsg.Context);
                             _qOutMessages.Enqueue(outMessage);
 
                             entry = zipInputStream.GetNextEntry();
